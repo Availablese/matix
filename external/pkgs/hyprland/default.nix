@@ -20,7 +20,7 @@
 
       # Monitor Settings
       monitor=eDP-1,${settings.resolution},0x0,1
-      monitor=HDMI-A-1,1920x1080@60,0x0,1,mirror,eDP-1
+      monitor=HDMI-A-1,preferred,auto,1,mirror,eDP-1 # HDMI-A-1,1920x1080@60,0x0,1,mirror,eDP-1
 
       # Programs 
       $terminal = ${settings.terminal}
@@ -77,10 +77,10 @@
               xray = true
               noise = 0.15
               
-              contrast = -1
-              vibrancy_darkness = 1
-              brightness = 1
-              vibrancy = -1
+              contrast = 1
+              vibrancy_darkness = 0.8
+              brightness = 0.5
+              vibrancy = 1
           }
       }
 
@@ -212,6 +212,7 @@
       # windowrulev2 = float,class:^(kitty)$,title:^(kitty)$
 
       layerrule = blur,waybar
+      layerrule = ignorezero,waybar
       layerrule = blur,wofi
       layerrule = blur,qutebrowser
 

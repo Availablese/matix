@@ -24,6 +24,43 @@ in
     };
   };
 
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings = {
+      General = {
+        # Shows battery charge of connected devices on supported
+        # Bluetooth adapters. Defaults to 'false'.
+        Experimental = true;
+        # When enabled other devices can connect faster to us, however
+        # the tradeoff is increased power consumption. Defaults to
+        # 'false'.
+        FastConnectable = true;
+      };
+      Policy = {
+        # Enable all controllers when they are found. This includes
+        # adapters present on start as well as adapters that are plugged
+        # in later on. Defaults to 'true'.
+        AutoEnable = true;
+      };
+    };
+  };
+
+  services.blueman.enable = true;
+
+  # Appimage (BalatroMP)
+  programs.appimage.enable = true;
+  programs.appimage.binfmt = true;
+  programs.appimage.package = pkgs.appimage-run.override { extraPkgs = pkgs: [
+    pkgs.python312
+  ]; };
+
+  # Enable /dev/net/tun with correct permissions
+  # users.extraGroups = [ "tun" ];
+  
+  virtualisation.libvirtd.enable = true;
+  virtualisation.libvirtd.qemu.runAsRoot = false;
+
   networking.hostName = "nixos"; # Define your hostname.
 
   # Enable networking
@@ -60,9 +97,8 @@ in
   users.users.${settings.username} = {
     isNormalUser = true;
     description = settings.username;
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "dialout" "tun"];
     packages = with pkgs; [];
-
   };
 
   # Core Packages
@@ -76,6 +112,7 @@ in
     fzf
     yazi
     nh
+    direnv
   ];
 
   # Font Packages

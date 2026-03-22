@@ -20,9 +20,10 @@
       font-family: Hack Nerd Font;
     }
 
-    #battery,
+    #battery, 
     #clock,
     #wireplumber,
+    #backlight,
     #network {
       padding: 0 10px;
       margin: 0 5px;
@@ -75,6 +76,7 @@
         ],
 
         "modules-right": [
+          "backlight",
           "network",
           "wireplumber",
           "battery",
@@ -84,6 +86,14 @@
         "hyprland/window": {
           "format": "{title}",
           "max-length": 50
+        },
+
+        "backlight": {
+          "min-brightness": 1.0,
+          "format": "{icon} {percent}%",
+          "scroll-step": 1,
+          "format-icons": ["󰃞","󰃟","󰃠"],
+          "device": "intel_backlight"
         },
 
 
@@ -108,7 +118,7 @@
         },
 
         "network": {
-          "interface": "wlp4s0",
+          "interface": "wlp0s20f3",
           "format": "{ifname}",
           "format-wifi": "  {signalStrength}%",
           "format-ethernet": "{ipaddr}/{cidr} 󰊗 ",
