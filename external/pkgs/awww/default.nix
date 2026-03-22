@@ -10,6 +10,8 @@
       # Start awww daemon if not running
       pgrep -x awww >/dev/null || awww-daemon &
 
+      sleep 1
+
       # Set your wallpaper
       awww img ~/.modular-nixos-configuration/external/theme/wallpaper/${settings.wallpaper} \
         --transition-type fade --transition-fps 60 --transition-duration 1
